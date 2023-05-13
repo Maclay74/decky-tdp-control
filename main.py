@@ -32,7 +32,7 @@ class Plugin:
         # Call ryzenadj with the new TDP values
         command = ["ryzenadj", f"--stapm-limit={target_tdp}", f"--fast-limit={boost_tdp}", f"--slow-limit={target_tdp}"]
         await self.run_command(self, command)
-        return await self.get_tdp()
+        return await self.get_tdp(self)
 
 
     async def run_command(self, command):
