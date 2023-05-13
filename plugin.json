@@ -1,6 +1,6 @@
 {
-  "name": "Example Plugin",
-  "author": "John Doe",
+  "name": "TDP Control",
+  "author": "Mike Finch",
   "flags": ["debug", "_root"],
   "publish": {
     "tags": ["template", "root"],
@@ -8,3 +8,4 @@
     "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
   }
 }
+ 

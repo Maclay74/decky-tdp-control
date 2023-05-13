@@ -2,27 +2,26 @@ import {
   ButtonItem,
   definePlugin,
   DialogButton,
-  Menu,
-  MenuItem,
   PanelSection,
   PanelSectionRow,
   Router,
   ServerAPI,
-  showContextMenu,
   staticClasses,
 } from "decky-frontend-lib";
-import { VFC } from "react";
+import { VFC, useState } from "react";
 import { FaShip } from "react-icons/fa";
-
-import logo from "../assets/logo.png";
 
 // interface AddMethodArgs {
 //   left: number;
 //   right: number;
 // }
 
-const Content: VFC<{ serverAPI: ServerAPI }> = ({}) => {
-  // const [result, setResult] = useState<number | undefined>();
+interface SetTDPMethodArgs {
+  tdp: number;
+}
+
+const Content: VFC<{ serverAPI: ServerAPI }> = ({serverAPI}) => {
+  const [current, setCurrent] = useState<string>("Unknown");
 
   // const onClick = async () => {
   //   const result = await serverAPI.callPluginMethod<AddMethodArgs, number>(
@@ -37,27 +36,35 @@ const Content: VFC<{ serverAPI: ServerAPI }> = ({}) => {
   //   }
   // };
 
+  const setTDP = async(tdp: number) => {
+    const result = await serverAPI.callPluginMethod<SetTDPMethodArgs, number>("set_tdp", { tdp });
+
+  
+    if (result.success) {
+      setCurrent(result.result.toString());
+    } else {
+      setCurrent(result.result);
+    }
+  }
+
   return (
-    <PanelSection title="Panel Section">
+    <PanelSection title={"Current: " + current}>
       <PanelSectionRow>
         <ButtonItem
           layout="below"
-          onClick={(e) =>
-            showContextMenu(
-              <Menu label="Menu" cancelText="CAAAANCEL" onCancel={() => {}}>
-                <MenuItem onSelected={() => {}}>Item #1</MenuItem>
-                <MenuItem onSelected={() => {}}>Item #2</MenuItem>
-                <MenuItem onSelected={() => {}}>Item #3</MenuItem>
-              </Menu>,
-              e.currentTarget ?? window
-            )
-          }
+          onClick={() => setTDP(5)} 
         >
-          Server says yolo
+          Set 5 TDP
+        </ButtonItem>
+        <ButtonItem
+          layout="below"
+          onClick={() => setTDP(18)}
+        >
+          Set 18 TDP
         </ButtonItem>
       </PanelSectionRow>
 
-      <PanelSectionRow>
+      {/*<PanelSectionRow>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <img src={logo} />
         </div>
@@ -73,7 +80,7 @@ const Content: VFC<{ serverAPI: ServerAPI }> = ({}) => {
         >
           Router
         </ButtonItem>
-      </PanelSectionRow>
+        </PanelSectionRow>*/}
     </PanelSection>
   );
 };
