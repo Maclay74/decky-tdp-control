@@ -2,6 +2,9 @@ name: Builder
 
 on: ["push", "pull_request", "workflow_dispatch"]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Decky TDP Control
