@@ -31,7 +31,7 @@ jobs:
     - name: Prepare structure
       run: |
         mkdir decky-tdp-control
-        mv * decky-tdp-control/     
+        mv !(decky-tdp-control) decky-tdp-control/     
     
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.1
