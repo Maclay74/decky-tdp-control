@@ -30,7 +30,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'build.zip'
-        exclusions: '*.git* /*node_modules/* /*assets/* /*src/* package-lock.json .prettierrc pnpm-lock.yaml README.md rollup.config.js tsconfig.json'
+        exclusions: '*.git* /*node_modules/* /*assets/* /*vscode/* /*src/* package-lock.json .prettierrc pnpm-lock.yaml README.md rollup.config.js tsconfig.json'
       
     - name: Upload package artifact
       uses: actions/upload-artifact@v3
