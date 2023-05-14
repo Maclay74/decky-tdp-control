@@ -5,7 +5,7 @@ This repository contains a tool designed to address an issue with the built-in T
 ![steamuserimages-a akamaihd](https://github.com/Maclay74/decky-tdp-control/assets/5504685/bb89ef24-d7dc-4777-aee0-135086233ddb)
 
 ## Decky Loader
-This plugin requires [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader). ProtonDB Badges is available on the store.
+This plugin requires [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader). 
 
 ## Steam Deck Homebrew Discord
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://deckbrew.xyz/discord)
