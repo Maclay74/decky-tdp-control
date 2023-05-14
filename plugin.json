@@ -1,10 +1,10 @@
 {
   "name": "TDP Control",
-  "author": "Mike Finch",
+  "author": "Maclay",
   "flags": ["debug", "_root"],
   "publish": {
-    "tags": ["template", "root"],
-    "description": "Decky example plugin.",
+    "tags": ["tdp", "root"],
+    "description": "This tool offers a solution to the TDP slider issue in the quick settings menu, and also allows for customizable TDP limits.",
     "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
   }
 }

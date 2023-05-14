@@ -1,112 +1,47 @@
 import {
-  ButtonItem,
   definePlugin,
-  DialogButton,
-  PanelSection,
-  PanelSectionRow,
-  Router,
   ServerAPI,
   staticClasses,
+  afterPatch,
 } from "decky-frontend-lib";
-import { VFC, useState } from "react";
-import { FaShip } from "react-icons/fa";
-
-// interface AddMethodArgs {
-//   left: number;
-//   right: number;
-// }
-
-interface SetTDPMethodArgs {
-  tdp: number;
-}
-
-const Content: VFC<{ serverAPI: ServerAPI }> = ({serverAPI}) => {
-  const [current, setCurrent] = useState<string>("Unknown");
-
-  // const onClick = async () => {
-  //   const result = await serverAPI.callPluginMethod<AddMethodArgs, number>(
-  //     "add",
-  //     {
-  //       left: 2,
-  //       right: 2,
-  //     }
-  //   );
-  //   if (result.success) {
-  //     setResult(result.result);
-  //   }
-  // };
-
-  const setTDP = async(tdp: number) => {
-    const result = await serverAPI.callPluginMethod<SetTDPMethodArgs, number>("set_tdp", { tdp });
-
-  
-    if (result.success) {
-      setCurrent(result.result.toString());
-    } else {
-      setCurrent(result.result);
-    }
-  }
-
-  return (
-    <PanelSection title={"Current: " + current}>
-      <PanelSectionRow>
-        <ButtonItem
-          layout="below"
-          onClick={() => setTDP(5)} 
-        >
-          Set 5 TDP
-        </ButtonItem>
-        <ButtonItem
-          layout="below"
-          onClick={() => setTDP(18)}
-        >
-          Set 18 TDP
-        </ButtonItem>
-      </PanelSectionRow>
-
-      {/*<PanelSectionRow>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <img src={logo} />
-        </div>
-      </PanelSectionRow>
-
-      <PanelSectionRow>
-        <ButtonItem
-          layout="below"
-          onClick={() => {
-            Router.CloseSideMenus();
-            Router.Navigate("/decky-plugin-test");
-          }}
-        >
-          Router
-        </ButtonItem>
-        </PanelSectionRow>*/}
-    </PanelSection>
-  );
-};
-
-const DeckyPluginRouterTest: VFC = () => {
-  return (
-    <div style={{ marginTop: "50px", color: "white" }}>
-      Hello World!
-      <DialogButton onClick={() => Router.NavigateToLibraryTab()}>
-        Go to Library
-      </DialogButton>
-    </div>
-  );
-};
+import { FaBolt } from "react-icons/fa";
+import { getTdpSlider } from "./utils/getSlider";
+import { SettingsProvider } from "./utils/getSettings";
+import { DeckyPanel } from "./components/Settings";
+import { TdpSlider } from "./components/TdpSlider";
 
 export default definePlugin((serverApi: ServerAPI) => {
-  serverApi.routerHook.addRoute("/decky-plugin-test", DeckyPluginRouterTest, {
-    exact: true,
+  getTdpSlider().then((slider) => {
+    if (!slider) return;
+
+    afterPatch(
+      slider.return,
+      "type",
+      (_: Record<string, unknown>[], ret?: any) => {
+        if (!ret) return null;
+        return (
+          <SettingsProvider>
+            <TdpSlider originalSlider={ret} serverApi={serverApi} />
+          </SettingsProvider>
+        );
+      }
+    );
+
+    serverApi.callPluginMethod<{}, string>("get_tdp", {}).then((response) => {
+      if (response.success) {
+        // @ts-ignore: decky global is not typed
+        window.SystemPerfStore.SetTDPLimit(parseInt(response.result, 10));
+      }
+    });
   });
 
   return {
-    title: <div className={staticClasses.Title}>Example Plugin</div>,
-    content: <Content serverAPI={serverApi} />,
-    icon: <FaShip />,
-    onDismount() {
-      serverApi.routerHook.removeRoute("/decky-plugin-test");
-    },
+    title: <div className={staticClasses.Title}>TDP Control</div>,
+    content: (
+      <SettingsProvider>
+        <DeckyPanel serverApi={serverApi} />
+      </SettingsProvider>
+    ),
+    icon: <FaBolt />,
   };
 });
