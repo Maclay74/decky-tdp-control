@@ -27,12 +27,16 @@ jobs:
     - name: Build Frontend
       run: |
         pnpm run build
+
+    - name: Prepare structure
+      run: |
+        mkdir decky-tdp-control
+        mv * decky-tdp-control/     
     
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.1
       with:
         type: 'zip'
-        directory: "../"
         filename: 'decky-tdp-control.zip'
         exclusions: '*.git* /*node_modules/* /*assets/* /*vscode/* /*src/* package-lock.json .prettierrc pnpm-lock.yaml README.md rollup.config.js tsconfig.json'
       
