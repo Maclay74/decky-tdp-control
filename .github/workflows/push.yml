@@ -19,7 +19,7 @@ jobs:
     - name: Install JS dependencies
       run: |
         npm i -g pnpm
-        pnpm install
+        pnpm i --frozen-lockfile
       
     - name: Build Frontend
       run: |
