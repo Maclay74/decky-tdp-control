@@ -29,11 +29,10 @@ jobs:
       uses: thedoctor0/zip-release@0.7.1
       with:
         type: 'zip'
-        filename: 'build.zip'
+        filename: 'decky-tdp-control.zip'
         exclusions: '*.git* /*node_modules/* /*assets/* /*vscode/* /*src/* package-lock.json .prettierrc pnpm-lock.yaml README.md rollup.config.js tsconfig.json'
       
     - name: Upload package artifact
-      uses: actions/upload-artifact@v3
+      uses: ncipollo/release-action@v1
       with:
-        name: Decky-Tdp-Control
-        path: ./build.zip
+        artifacts: "decky-tdp-control.zip"
