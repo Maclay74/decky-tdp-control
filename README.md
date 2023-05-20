@@ -7,6 +7,13 @@ This repository contains a tool designed to address an issue with the built-in T
 ## Decky Loader
 This plugin requires [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader). 
 
+## Installation
+0. Make sure you have decky-loader installed
+1. Download the latest release
+2. Place it somewhere on your device
+3. Open decky-loader's settings, enable developer mode
+4. In settings' developer section choose "Install plugin from zip" and select downlaoded archive
+
 ## Steam Deck Homebrew Discord
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://deckbrew.xyz/discord)
 
