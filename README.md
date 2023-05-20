@@ -12,7 +12,7 @@ This plugin requires [Decky Loader](https://github.com/SteamDeckHomebrew/decky-l
 1. Download the latest release
 2. Place it somewhere on your device
 3. Open decky-loader's settings, enable developer mode
-4. In developer's section choose "Install plugin from zip" and select downlaoded archive
+4. In developer's section choose "Install plugin from zip" and select the archive you downloaded earlier
 
 ## Steam Deck Homebrew Discord
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://deckbrew.xyz/discord)
