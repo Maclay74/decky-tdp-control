@@ -1,5 +1,5 @@
 {
-    "deckip"    : "gamer@192.168.0.33",
+    "deckip"    : "gamer@192.168.86.30",
     "deckport"  : "22",
     "deckpass"  : "gamer",
     "deckkey"   : "-i ${env:HOME}/.ssh/id_ed25519",
